@@ -3,131 +3,346 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>STERLA - PREMIUM AI LEARNING APP</title>
+<title>STERLA - COMPLETE AI LEARNING APP</title>
 <style>
 :root{
 --black:#0b0b0d; --card:#111216; --light-blue:#84d2ff; --light-purple:#c2b3ff;
---gold:#ffd700; --premium:#ff6b35; --card-gold:#f4e4bc;
 --muted:#9aa0b4; --white:#ffffff; --success:#3cd48b; --danger:#e55a5a;
 }
 *{box-sizing:border-box;font-family:Inter,Poppins,sans-serif;}
-html,body{height:100%;margin:0;background:linear-gradient(180deg,#0b0b0d 0%,#0f1724 100%);color:var(--white);overflow:hidden}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,#0b0b0d 0%,#0f1724 100%);color:var(--white);}
 #appPage{height:100vh;display:flex;overflow:hidden}
-#sidebar{width:280px;background:linear-gradient(180deg,#071028,#0b1633);padding:28px;color:var(--white);border-right:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;scrollbar-width:thin;scrollbar-color:var(--light-purple) transparent}
-#sidebar::-webkit-scrollbar{width:6px}
-#sidebar::-webkit-scrollbar-track{background:transparent}
-#sidebar::-webkit-scrollbar-thumb{background:var(--light-purple);border-radius:3px}
-.brand{font-size:32px;font-weight:800;color:var(--light-purple);letter-spacing:1.5px;text-align:center;padding:20px 0;background:linear-gradient(90deg,var(--light-blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.premium-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:#000;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;text-transform:uppercase;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
-.nav-section{margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.03)}
-.nav-section:last-child{border-bottom:none}
-.nav-title{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:600;padding-left:8px}
-.nav-btn{background:transparent;border:none;color:var(--muted);padding:14px 16px;text-align:left;border-radius:12px;cursor:pointer;font-weight:700;width:100%;margin:0;display:flex;align-items:center;gap:12px;position:relative;transition:all 0.3s}
-.nav-btn.active, .nav-btn:hover{background:rgba(255,255,255,0.04);color:var(--white);box-shadow:0 8px 25px rgba(124,107,255,0.12)}
-.nav-btn.premium::after{content:'⭐';position:absolute;right:16px;color:var(--gold)}
-#main{flex:1;overflow:auto;padding:30px;background:linear-gradient(180deg,#0b0f1a 0%,#0b1220 30%);display:flex;flex-direction:column}
-#welcomeBox{background:linear-gradient(135deg,#071028,#0b1430,#1a1f3a);border-radius:20px;padding:35px;color:var(--white);display:flex;justify-content:space-between;align-items:center;gap:25px;margin-bottom:25px;flex-shrink:0;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4)}
-#welcomeBox::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--light-blue),var(--gold),var(--premium))}
-#welcomeBox h2{color:var(--light-blue);font-size:28px;margin:0;font-weight:800}
-#welcomeBox p{margin:0;color:var(--muted);font-size:16px}
-.stats-grid{display:flex;gap:20px;margin-top:20px}
-.stat-card{background:linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));padding:20px;border-radius:16px;text-align:center;flex:1;border:1px solid rgba(255,255,255,0.05);transition:all 0.3s}
-.stat-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(255,215,0,0.15)}
-.stat-number{font-size:32px;font-weight:800;background:linear-gradient(90deg,var(--gold),var(--light-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:30px}
-.feature-card{background:linear-gradient(135deg,rgba(132,210,255,0.1),rgba(194,179,255,0.1));padding:25px;border-radius:16px;text-align:center;border:1px solid rgba(255,255,255,0.08);transition:all 0.3s;cursor:pointer}
-.feature-card:hover{transform:translateY(-8px);box-shadow:0 25px 50px rgba(132,210,255,0.2)}
-.feature-icon{font-size:40px;margin-bottom:12px;display:block;background:linear-gradient(90deg,var(--light-blue),var(--light-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.subject-grid{display:flex;flex-wrap:wrap;gap:18px}
-.subject-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:20px;border-radius:14px;width:200px;cursor:pointer;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02);font-weight:800;color:var(--light-blue);text-align:center;transition:all 0.3s;position:relative}
-.subject-card:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(6,10,40,0.8)}
-.subject-card.premium::before{content:'⭐';position:absolute;top:10px;right:10px;color:var(--gold);font-size:18px}
-.store-card{background:linear-gradient(135deg,var(--gold),#ffaa00);color:#000;padding:20px;border-radius:16px;margin:20px 0;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden}
-.store-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);transition:0.5s}
-.store-card:hover::before{left:100%}
-.store-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(255,215,0,0.4)}
-.store-price{font-size:24px;font-weight:800;color:#000}
-.page{display:none;flex:1}
-.page.active{display:flex;flex-direction:column}
-.output-box{background:linear-gradient(180deg,#061022,#081428);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.02);color:var(--white);flex:1}
-.flow-controls{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
-.flow-controls select,.flow-controls button{padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:var(--white);font-weight:600}
-.flow-controls button{background:linear-gradient(90deg,var(--light-blue),var(--light-purple));border:none;cursor:pointer}
-.flow-controls button:hover,.flow-controls button:active{transform:translateY(-2px)}
-.flow-node{fill:#071f35;stroke:var(--light-blue);stroke-width:3px;rx:12;ry:12;cursor:pointer;transition:all 0.3s}
-.flow-node:hover{fill:#0a2a4a;stroke:var(--light-purple);stroke-width:4px;transform:translateY(-2px)}
-.flow-text{fill:var(--white);font-family:Inter,sans-serif;font-weight:600;font-size:14px;text-anchor:middle;pointer-events:none}
-.flow-line{stroke:var(--light-purple);stroke-width:3px;stroke-linecap:round;fill:none;filter:drop-shadow(0 2px 4px rgba(132,210,255,0.3))}
-.quiz-btn{margin:8px;padding:12px 20px;border-radius:8px;border:1px solid var(--light-blue);background:transparent;color:var(--light-blue);cursor:pointer;font-weight:600}
-.quiz-btn:hover{background:var(--light-blue);color:#001}
-.quiz-btn.correct{background:var(--success);color:#000}
-.quiz-btn.wrong{background:var(--danger);color:#fff}
-#chatBox{background:#061025;padding:12px;border-radius:12px;min-height:360px;max-height:520px;overflow:auto;border:1px solid rgba(255,255,255,0.02);flex:1}
-.chat-input{margin-top:12px;display:flex;gap:12px}
-.chat-input input{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
-.chat-input button{padding:10px 16px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--light-blue),var(--light-purple));color:#001;font-weight:800}
-.btn{width:200px;padding:12px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--light-blue),var(--light-purple));color:#001;cursor:pointer;font-weight:700;margin-top:20px}
-.btn-small{padding:8px 16px;border-radius:8px;border:none;font-weight:600;margin:4px;font-size:14px}
-.btn-premium{background:linear-gradient(90deg,var(--gold),#ffaa00) !important;color:#000 !important;box-shadow:0 4px 15px rgba(255,215,0,0.4)}
-.hw-submit{display:flex;flex-direction:column;gap:12px}
-.hw-submit textarea{flex:1;padding:15px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);color:var(--white);font-family:monospace;resize:vertical;min-height:120px}
-.hw-item{background:rgba(255,255,255,0.05);padding:16px;border-radius:12px;border-left:4px solid var(--light-purple);margin-bottom:12px}
-.hw-item.graded{padding-left:12px;border-left-color:var(--success)}
-.hw-item.rejected{border-left-color:var(--danger)}
-.hw-item.reviewed{background:rgba(255,255,255,0.08);border-left-color:var(--light-blue)}
-.paper-item{background:rgba(255,255,255,0.08);padding:20px;border-radius:16px;margin-bottom:16px;border-left:4px solid var(--gold);position:relative}
-.paper-item:hover{box-shadow:0 10px 30px rgba(255,215,0,0.2)}
-.paper-price{position:absolute;top:15px;right:15px;background:var(--gold);color:#000;padding:6px 12px;border-radius:20px;font-weight:800;font-size:14px}
-.role-indicator{background:var(--light-purple);color:#000;padding:6px 12px;border-radius:20px;font-size:14px;font-weight:600;display:inline-block}
-.role-toggle{display:flex;gap:8px;margin:10px 0}
-.role-toggle button{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:var(--white);font-weight:600;cursor:pointer}
-.role-toggle button.active{background:linear-gradient(90deg,var(--light-blue),var(--light-purple));color:#001}
-.notes-section{display:flex;flex-direction:column;gap:12px}
-.notes-section textarea{min-height:150px}
-#notesSummary{padding:20px;background:rgba(255,255,255,0.05);border-radius:12px;border-left:4px solid var(--success);display:none}
-.quiz-review-item{background:rgba(255,255,255,0.05);padding:16px;border-radius:12px;margin-bottom:12px;border-left:4px solid var(--light-blue)}
-.store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;padding:10px 18px;border-radius:999px;font-weight:700;z-index:1000}
-.toast.success{background:var(--success);color:#000}
-.toast.error{background:var(--danger);color:#fff}
-.toast.premium{background:var(--gold);color:#000}
-@media (max-width:900px){#sidebar{display:none}#main{padding:18px}}
+#sidebar{
+  width:260px;background:linear-gradient(180deg,#071028,#0b1633);
+  padding:28px;color:var(--white);border-right:1px solid rgba(255,255,255,0.03);
+  display:flex;flex-direction:column;gap:14px;flex-shrink:0;
+  overflow-y:auto; /* Scrollable sidebar */
+  scroll-behavior:smooth;
+  scrollbar-width:thin;
+  scrollbar-color:var(--light-purple) transparent;
+}
+#sidebar::-webkit-scrollbar{width:6px;}
+#sidebar::-webkit-scrollbar-track{background:transparent;}
+#sidebar::-webkit-scrollbar-thumb{background:var(--light-purple);border-radius:3px;}
+.brand{
+  font-size:28px;font-weight:900;color:var(--light-purple);letter-spacing:1px;
+  margin-bottom:10px;
+}
+.nav-btn{
+  background:transparent;border:none;color:var(--muted);
+  padding:12px 14px;text-align:left;border-radius:10px;cursor:pointer;
+  font-weight:700;width:100%;margin:0;transition:color 0.3s ease;
+}
+.nav-btn.active, .nav-btn:hover{
+  background:rgba(255,255,255,0.02);
+  color:var(--white);
+  box-shadow:0 6px 20px rgba(124,107,255,0.08);
+}
+#main{
+  flex:1;overflow:auto;padding:30px;
+  background:linear-gradient(180deg,#0b0f1a 0%,#0b1220 30%);
+  display:flex;flex-direction:column;
+  font-smooth: antialiased;
+}
+#welcomeBox{
+  background:linear-gradient(180deg,#071028,#0b1430);
+  border-radius:16px;padding:26px;color:var(--white);
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  margin-bottom:30px;flex-shrink:0;
+  box-shadow: 0 8px 24px rgba(124,107,255,0.15);
+  border:1px solid rgba(255,255,255,0.05);
+}
+#welcomeBox h2{
+  color:var(--light-blue);font-size:24px;margin:0;font-weight:900;
+  letter-spacing:0.75px;
+}
+#welcomeBox p{
+  margin:4px 0 0 0;color:var(--muted);font-weight:600;font-size:14px;
+  max-width:300px;
+  line-height:1.4;
+}
+#welcomeUser{
+  color:var(--light-blue);
+  font-weight:900;
+  font-size:18px;
+  text-shadow:0 2px 4px rgba(132,210,255,0.3);
+}
+.role-indicator{
+  background: var(--light-purple);
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  user-select: none;
+  box-shadow:0 4px 12px rgba(194,179,255,0.4);
+}
+.subject-grid{
+  display:flex;flex-wrap:wrap;gap:18px;
+}
+.subject-card{
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+  padding:20px;border-radius:14px;width:200px;cursor:pointer;
+  box-shadow:0 10px 30px rgba(2,6,23,0.6);
+  border:1px solid rgba(255,255,255,0.02);
+  font-weight:800;color:var(--light-blue);
+  text-align:center;
+  transition:all 0.3s;
+  user-select:none;
+  position:relative;
+  overflow:hidden;
+}
+.subject-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--light-blue),var(--light-purple));
+  transform:scaleX(0);transition:transform 0.3s ease;
+}
+.subject-card:hover::before{transform:scaleX(1);}
+.subject-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 50px rgba(6,10,40,0.8);
+}
+.page{display:none;flex:1;}
+.page.active{display:flex;flex-direction:column;}
+.output-box{
+  background:linear-gradient(180deg,#061022,#081428);
+  padding:18px;border-radius:14px;
+  border:1px solid rgba(255,255,255,0.02);
+  color:var(--white);
+  flex:1;
+  overflow-y:auto;
+}
+.flow-controls{
+  display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap;
+}
+.flow-controls select,.flow-controls button{
+  padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.03);
+  color:var(--white);
+  font-weight:600;
+}
+.flow-controls button{
+  background:linear-gradient(90deg,var(--light-blue),var(--light-purple));
+  border:none;
+  cursor:pointer;
+  transition:transform 0.2s ease;
+}
+.flow-controls button:hover,.flow-controls button:active{
+  transform:translateY(-2px);
+}
+.flow-node{
+  fill:#071f35;stroke:var(--light-blue);stroke-width:3px;
+  rx:12;ry:12;cursor:pointer;transition:all 0.3s;
+  user-select:none;
+}
+.flow-node:hover{
+  fill:#0a2a4a;stroke:var(--light-purple);
+  stroke-width:4px;
+  transform:translateY(-2px);
+}
+.flow-text{
+  fill:var(--white);
+  font-family:Inter,sans-serif;
+  font-weight:600;
+  font-size:14px;
+  text-anchor:middle;
+  pointer-events:none;
+  user-select:none;
+}
+.flow-line{
+  stroke:var(--light-purple);
+  stroke-width:3px;
+  stroke-linecap:round;
+  fill:none;
+  filter:drop-shadow(0 2px 4px rgba(132,210,255,0.3));
+}
+.flow-node.expanded {
+  fill: #0f3155;
+  stroke-width: 5px;
+  stroke: var(--light-purple);
+}
+.flow-node-tooltip {
+  fill: var(--light-purple);
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select:none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+.quiz-btn{
+  margin:8px;padding:12px 20px;border-radius:8px;border:1px solid var(--light-blue);
+  background:transparent;color:var(--light-blue);
+  cursor:pointer;font-weight:600;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
+  user-select:none;
+}
+.quiz-btn:hover{
+  background:var(--light-blue);
+  color:#001;
+  transform:translateY(-1px);
+}
+.quiz-btn.correct{
+  background:var(--success);
+  color:#000;
+}
+.quiz-btn.wrong{
+  background:var(--danger);
+  color:#fff;
+}
+#chatBox{
+  background:#061025;padding:12px;border-radius:12px;
+  min-height:360px;max-height:520px;overflow:auto;
+  border:1px solid rgba(255,255,255,0.02);
+  flex:1;
+  font-size:14px;
+  line-height:1.5;
+}
+.chat-input{
+  margin-top:12px;display:flex;gap:12px;
+}
+.chat-input input{
+  flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
+  background:transparent;color:#fff;
+  font-size:14px;
+}
+.chat-input button{
+  padding:10px 16px;border-radius:10px;border:none;
+  background:linear-gradient(90deg,var(--light-blue),var(--light-purple));
+  color:#001;font-weight:800;
+  cursor:pointer;
+  transition: transform 0.2s ease;
+}
+.chat-input button:hover {
+  transform: translateY(-2px);
+}
+.btn{
+  width:200px;padding:12px;border-radius:12px;border:none;
+  background:linear-gradient(90deg,var(--light-blue),var(--light-purple));
+  color:#001;cursor:pointer;font-weight:700;margin-top:20px;
+  user-select:none;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(132,210,255,0.4);
+}
+.btn-small{
+  padding:8px 16px;border-radius:8px;border:none;
+  font-weight:600;margin:4px;font-size:14px;
+  user-select:none;
+  transition: transform 0.2s ease;
+}
+.btn-small:hover{transform:translateY(-1px);}
+.hw-submit{
+  display:flex;flex-direction:column;gap:12px;
+}
+.hw-submit textarea{
+  flex:1;padding:15px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.02);color:var(--white);
+  font-family:monospace;resize:vertical;min-height:120px;
+}
+.hw-item{
+  background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;
+  border-left:4px solid var(--light-purple);
+  margin-bottom:16px;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.hw-item:hover{
+  transform: translateX(4px);
+  box-shadow: 0 8px 25px rgba(194,179,255,0.2);
+}
+.hw-item.graded{
+  padding-left:12px;border-left-color:var(--success);
+}
+.hw-item.rejected{
+  border-left-color:var(--danger);
+}
+.hw-item.reviewed{
+  background:rgba(255,255,255,0.08);border-left-color:var(--light-blue);
+}
+.role-toggle{
+  display:flex;gap:8px;margin:10px 0;
+}
+.role-toggle button{
+  flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.03);
+  color:var(--white);
+  font-weight:600;
+  cursor:pointer;
+  user-select:none;
+  transition: all 0.3s ease;
+}
+.role-toggle button.active{
+  background:linear-gradient(90deg,var(--light-blue),var(--light-purple));
+  color:#001;
+  box-shadow:0 4px 12px rgba(132,210,255,0.4);
+}
+.notes-section{
+  display:flex;flex-direction:column;gap:12px;
+}
+.notes-section textarea{
+  min-height:150px;
+  font-size: 14px;
+}
+#notesSummary{
+  padding:20px;
+  background:rgba(255,255,255,0.05);
+  border-radius:12px;
+  border-left:4px solid var(--success);
+  display:none;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.quiz-review-item{
+  background:rgba(255,255,255,0.05);
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:16px;
+  border-left:4px solid var(--light-blue);
+  font-size: 14px;
+  line-height: 1.5;
+  transition: transform 0.2s ease;
+}
+.quiz-review-item:hover{transform: translateX(4px);}
+.toast{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:26px;padding:12px 20px;border-radius:999px;font-weight:700;z-index:1000;
+  user-select:none;
+  box-shadow:0 8px 25px rgba(0,0,0,0.4);
+}
+.toast.success{
+  background:var(--success);color:#000;
+}
+.toast.error{
+  background:var(--danger);color:#fff;
+}
+@media (max-width:900px){
+  #sidebar{display:none}
+  #main{padding:18px}
+}
 </style>
 </head>
 <body>
 
 <div id="appPage">
 <aside id="sidebar">
-<div class="brand">STERLA<span class="premium-badge">PREMIUM</span></div>
-<div class="nav-section">
-<div class="nav-title">Core</div>
-<button class="nav-btn active" data-page="homePage" onclick="navigate(event)">🏠 Home</button>
-<button class="nav-btn" data-page="subjectsPage" onclick="navigate(event)">📚 Subjects</button>
-<button class="nav-btn" data-page="topicPage" onclick="navigate(event)">📖 Topics</button>
-</div>
-<div class="nav-section">
-<div class="nav-title">Premium Tools</div>
-<button class="nav-btn premium" data-page="mindmapPage" onclick="navigate(event)">📊 Flowchart</button>
-<button class="nav-btn premium" data-page="quizPage" onclick="navigate(event)">❓ Quiz</button>
-<button class="nav-btn premium" data-page="wsPage" onclick="navigate(event)">📝 Worksheet</button>
-<button class="nav-btn premium" data-page="hwPage" onclick="navigate(event)">✏️ Homework</button>
-</div>
-<div class="nav-section">
-<div class="nav-title">AI Features</div>
-<button class="nav-btn premium" data-page="aiChatPage" onclick="navigate(event)">💬 AI Chat</button>
-<button class="nav-btn premium" data-page="notesPage" onclick="navigate(event)">📝 AI Notes</button>
-</div>
-<div class="nav-section">
-<div class="nav-title">Premium Store ⭐</div>
-<button class="nav-btn premium" data-page="storePage" onclick="navigate(event)">🛒 Premium Store</button>
-<button class="nav-btn premium" data-page="myPapersPage" onclick="navigate(event)">📄 My Papers</button>
-</div>
+<div class="brand">STERLA</div>
+<button class="nav-btn active" data-page="homePage" onclick="navigate(event)"> 🏠 Home</button>
+<button class="nav-btn" data-page="subjectsPage" onclick="navigate(event)"> 📚 Subjects</button>
+<button class="nav-btn" data-page="topicPage" onclick="navigate(event)"> 🎯 Topics</button>
+<button class="nav-btn" data-page="mindmapPage" onclick="navigate(event)"> 📊 Flowchart</button>
+<button class="nav-btn" data-page="quizPage" onclick="navigate(event)"> ❓ Quiz</button>
+<button class="nav-btn" data-page="wsPage" onclick="navigate(event)"> 📝 Worksheet</button>
+<button class="nav-btn" data-page="hwPage" onclick="navigate(event)"> ✏️ Homework</button>
+<button class="nav-btn" data-page="aiChatPage" onclick="navigate(event)"> 💬 AI Chat</button>
+<button class="nav-btn" data-page="notesPage" onclick="navigate(event)"> 📋 AI Notes</button>
 <div style="flex:1"></div>
 <div style="padding:12px 0;color:var(--muted);font-size:14px;text-align:center;border-top:1px solid rgba(255,255,255,0.05)">
 <div class="role-toggle">
-<button class="role-btn active" onclick="switchRole('Student')">Student</button>
-<button class="role-btn" onclick="switchRole('Teacher')">Teacher</button>
+<button class="role-btn active" onclick="switchRole('Student')">👨‍🎓 Student</button>
+<button class="role-btn" onclick="switchRole('Teacher')">👨‍🏫 Teacher</button>
 </div>
 <span id="roleIndicator" class="role-indicator">Student</span>
 </div>
@@ -137,74 +352,80 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,#0b0b0d 0%,#0f1
 <section id="homePage" class="page active">
 <div id="welcomeBox">
 <div>
-<h2>Welcome to STERLA PREMIUM</h2>
-<p>Advanced AI Learning + Teacher Store</p>
+<h2>Welcome to STERLA</h2>
+<p id="welcomeMessage">Your AI learning companion</p>
 </div>
-<div style="text-align:right;color:var(--muted)">
+<div style="text-align:right;color:var(--muted);font-weight:700;font-size:16px">
 <div id="welcomeUser">Student</div>
-<div style="font-size:14px;color:var(--gold);">Premium Member</div>
 </div>
 </div>
-
-<div class="stats-grid">
-<div class="stat-card">
-<div class="stat-number" id="totalSubjects">32</div>
-<div>Subjects</div>
-</div>
-<div class="stat-card">
-<div class="stat-number" id="totalPapers">12</div>
-<div>Premium Papers</div>
-</div>
-<div class="stat-card">
-<div class="stat-number" id="aiTools">7</div>
-<div>AI Tools</div>
-</div>
-</div>
-
-<div class="feature-grid">
-<div class="feature-card">
-<div class="feature-icon">📊</div>
-<div><strong>AI Flowcharts</strong></div>
-<div>32 topics covered</div>
-</div>
-<div class="feature-card">
-<div class="feature-icon">❓</div>
-<div><strong>Smart Quizzes</strong></div>
-<div>Teacher grading</div>
-</div>
-<div class="feature-card">
-<div class="feature-icon">🛒</div>
-<div><strong>Premium Store</strong></div>
-<div>Sell your papers</div>
-</div>
-<div class="feature-card">
-<div class="feature-icon">✨</div>
-<div><strong>AI Notes</strong></div>
-<div>Smart summarizer</div>
-</div>
-<div class="feature-card">
-<div class="feature-icon">👩‍🏫</div>
-<div><strong>Teacher Dashboard</strong></div>
-<div>Manage Assignments & Grades</div>
-</div>
-<div class="feature-card">
-<div class="feature-icon">📅</div>
-<div><strong>Study Planner</strong></div>
-<div>Organize Learning Time</div>
-</div>
-</div>
-
-<h3 style="color:var(--light-blue);margin:30px 0 20px 0">Quick Subjects (32 Topics)</h3>
+<h3 style="color:var(--light-blue);margin:8px 0 20px 0;font-weight:800">Quick Subjects (23 Topics)</h3>
 <div class="subject-grid" id="subjectsQuick"></div>
 </section>
 
 <section id="subjectsPage" class="page">
-<h3 style="color:var(--light-blue);margin-bottom:20px">All 32 Premium Subjects</h3>
+<h3 style="color:var(--light-blue);margin-bottom:20px;font-weight:800">All 23 Subjects</h3>
 <div class="subject-grid" id="subjectsList"></div>
 </section>
 
-<!-- Other sections like storePage, myPapersPage, topicPage, etc. remain unchanged -->
+<section id="topicPage" class="page">
+<h3 style="color:var(--light-blue);margin-bottom:20px;font-weight:800">Topics</h3>
+<div class="subject-grid" id="topicsList"></div>
+</section>
 
+<section id="mindmapPage" class="page">
+<h3 style="color:var(--light-blue);margin-bottom:20px;font-weight:800">Flowchart Generator</h3>
+<div class="flow-controls">
+<label style="color:var(--light-blue);font-weight:700;margin-right:8px;">Select Topic:</label>
+<select id="flowTopicSelect">
+<option value="">Choose a subject first...</option>
+</select>
+<button onclick="generateFlowchart()">🎯 Generate Flowchart</button>
+</div>
+<div id="flowchartStatus" style="color:var(--light-purple);margin-bottom:15px;font-weight:700"></div>
+<div id="flowchartContainer" style="background:linear-gradient(180deg,#071427,#02101a);border-radius:14px;padding:20px;overflow:auto;border:1px solid rgba(255,255,255,0.03);flex:1;">
+<svg id="flowSvg" width="100%" height="500"></svg>
+</div>
+</section>
+
+<section id="quizPage" class="page">
+<h3 style="color:var(--light-blue);margin-bottom:20px;font-weight:800">Quiz <span id="quizRoleIndicator"></span></h3>
+<div id="quizStatus" style="color:var(--light-purple);margin-bottom:15px;font-weight:700"></div>
+<div id="quizOutput" class="output-box"></div>
+<button class="btn" onclick="loadQuiz()">🔄 Reload Quiz</button>
+</section>
+
+<section id="wsPage" class="page">
+<h3 style="color:var(--light-blue);margin-bottom:20px;font-weight:800">Worksheet</h3>
+<div id="wsStatus" style="color:var(--light-purple);margin-bottom:15px;font-weight:700"></div>
+<div id="wsOutput" class="output-box"></div>
+<button class="btn" onclick="loadWorksheet()">🔄 Reload Worksheet</button>
+</section>
+
+<section id="hwPage" class="page">
+<h3 style="color:var(--light-blue);margin-bottom:20px;font-weight:800">Homework <span id="hwRoleIndicator"></span></h3>
+<div id="hwStatus" style="color:var(--light-purple);margin-bottom:15px;font-weight:700"></div>
+<div id="hwOutput" class="output-box" style="display:flex;flex-direction:column;gap:20px"></div>
+</section>
+
+<section id="aiChatPage" class="page">
+<h3 style="color:var(--light-blue);margin-bottom:20px;font-weight:800">AI Chat <span style="color:var(--muted);font-size:16px">(Topic-aware)</span></h3>
+<div id="chatBox"></div>
+<div class="chat-input">
+<input type="text" id="chatInput" placeholder="Ask about your selected topic..." />
+<button onclick="sendMessage()">💬 Send</button>
+</div>
+</section>
+
+<section id="notesPage" class="page">
+<h3 style="color:var(--light-blue);margin-bottom:20px;font-weight:800">AI Notes Summarizer</h3>
+<div class="notes-section">
+<div id="notesStatus" style="color:var(--light-purple);margin-bottom:15px;font-weight:700"></div>
+<textarea id="notesInput" placeholder="Paste your long paragraph or notes here... AI will summarize it for you!"></textarea>
+<button class="btn" onclick="generateSummary()" style="width:100%;">✨ Generate Summary</button>
+<div id="notesSummary"></div>
+</div>
+</section>
 </main>
 </div>
 
@@ -212,286 +433,658 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,#0b0b0d 0%,#0f1
 // GLOBAL STATE
 let userName = 'Student', userRole = 'Student';
 let selectedSubject = null, chosenTopic = null;
+let expandedNodes = {};
 
-// Sample saved Papers - pricing replaced with "premium"
-let premiumPapers = JSON.parse(localStorage.getItem('sterlaPremiumPapers') || '[{"id":"math_test","title":"Class 10 Math Full Test","subject":"Algebra","price":"premium","teacher":"Teacher1","sales":5,"content":"20 questions on Algebra, Linear & Quadratic Equations"},{"id":"science_paper","title":"Science Combined Paper","subject":"Electricity","price":"premium","teacher":"Teacher2","sales":8,"content":"15 questions on Electricity, Light & Sound"},{"id":"english_grammar","title":"Advanced Grammar Test","subject":"Grammar","price":"premium","teacher":"Teacher1","sales":12,"content":"Grammar comprehensive test"},{"id":"html_project","title":"HTML/CSS Project","subject":"HTML","price":"premium","teacher":"Teacher3","sales":3,"content":"Complete webpage project with HTML & CSS"},{"id":"physics_motion","title":"Physics Motion Test","subject":"Force & Motion","price":"premium","teacher":"Teacher2","sales":7,"content":"Newton laws & motion problems"},{"id":"poetry_analysis","title":"Poetry Analysis Paper","subject":"Poetry","price":"premium","teacher":"Teacher1","sales":4,"content":"Literary analysis questions"},{"id":"trig_full","title":"Trigonometry Complete","subject":"Trigonometry","price":"premium","teacher":"Teacher4","sales":6,"content":"Full trigonometry coverage"},{"id":"ai_ethics","title":"AI Ethics Discussion","subject":"AI Basics","price":"premium","teacher":"Teacher3","sales":2,"content":"AI ethics case studies"},{"id":"data_viz","title":"Data Science Visualization","subject":"Data Science","price":"premium","teacher":"Teacher4","sales":1,"content":"Charts & visualization tasks"},{"id":"letter_writing","title":"Formal Letter Collection","subject":"Formal Letter","price":"premium","teacher":"Teacher1","sales":15,"content":"10 different letter types"},{"id":"biology_test","title":"Biology Reproduction","subject":"Reproduction","price":"premium","teacher":"Teacher2","sales":9,"content":"Complete biology test"},{"id":"js_advanced","title":"Advanced JavaScript","subject":"JavaScript","price":"premium","teacher":"Teacher3","sales":1,"content":"DOM manipulation & events"}]');
-
-// Expanded subjects list
+// 23 FULL SUBJECTS
 const subjects = [
-  "English","Hindi","Mathematics","Physics","Chemistry","Biology","History",
-  "Geography","Economics","Political Science","Computer Science","Psychology",
-  "Sociology","Business Studies","Accountancy","Physical Education","Fine Arts",
-  "Music","Dance","Home Science","Environmental Science","AI Basics",
-  "JavaScript","HTML","CSS","Data Science","Formal Letter","Philosophy",
-  "Astronomy","Law","Marketing","Finance"
+  "Grammar","Formal Letter","Speech","Prose","Poetry","Essay Writing","Comprehension",
+  "Algebra","Linear Equations","Quadratic Equations","Mensuration","Geometry","Trigonometry",
+  "Sound","Electricity","Light","Force & Motion","Reproduction","Nutrition",
+  "HTML","CSS","JavaScript","AI Basics","Data Science"
 ];
 
-// Map subjects to topics
+// COMPREHENSIVE DATA BANKS FOR ALL 23 TOPICS
 const subjectTopics = {
-  "English":["Grammar","Essay Writing","Comprehension","Poetry","Prose","Speech"],
-  "Hindi":["Grammar","Essay Writing","Comprehension","Poetry"],
-  "Mathematics":["Algebra","Geometry","Trigonometry","Mensuration","Calculus","Probability","Statistics"],
-  "Physics":["Mechanics","Electricity","Light","Sound","Thermodynamics","Magnetism","Optics"],
-  "Chemistry":["Physical Chemistry","Organic Chemistry","Inorganic Chemistry","Biochemistry"],
-  "Biology":["Anatomy","Physiology","Genetics","Reproduction","Nutrition","Ecology"],
-  "History":["Ancient","Medieval","Modern","World History","Indian History"],
-  "Geography":["Physical Geography","Human Geography","Economic Geography","Environmental Science"],
-  "Economics":["Microeconomics","Macroeconomics","Indian Economy","International Economics"],
-  "Political Science":["Political Theory","Indian Politics","International Relations","Comparative Politics"],
-  "Computer Science":["Programming","Data Structures","Algorithms","Database","Networking"],
-  "Psychology":["Developmental","Cognitive","Social","Abnormal Psychology"],
-  "Sociology":["Societal Structure","Culture","Social Change","Research Methods"],
-  "Business Studies":["Management","Marketing","Finance","Entrepreneurship"],
-  "Accountancy":["Bookkeeping","Financial Statements","Accounting Standards","Taxation"],
-  "Physical Education":["Fitness","Sports Science","Health Education","Nutrition"],
-  "Fine Arts":["Drawing","Painting","Sculpture","Art History"],
-  "Music":["Vocal","Instrumental","Theory","Composition"],
-  "Dance":["Classical","Folk","Contemporary","Choreography"],
-  "Home Science":["Nutrition","Family Resource Management","Child Development","Textiles"],
-  "Environmental Science":["Pollution","Conservation","Ecosystems","Climate Change"],
-  "AI Basics":["Machine Learning","Neural Networks","Data Ethics","Robotics","Deep Learning"],
-  "JavaScript":["Syntax","DOM","Events","Functions","Objects","ES6 Features"],
-  "HTML":["Tags","Forms","Tables","Media","Semantic HTML"],
-  "CSS":["Selectors","Box Model","Flexbox","Grid","Animations","Responsive Design"],
-  "Data Science":["Data Cleaning","Visualization","Modeling","Statistics","Machine Learning"],
-  "Formal Letter":["Format","Language","Closing","Styles","Business Letters"],
-  "Philosophy":["Metaphysics","Ethics","Logic","Epistemology","Political Philosophy"],
-  "Astronomy":["Solar System","Stars","Galaxies","Cosmology","Telescopes"],
-  "Law":["Constitutional Law","Criminal Law","Civil Law","International Law"],
-  "Marketing":["Market Research","Advertising","Branding","Digital Marketing"],
-  "Finance":["Investment","Banking","Financial Markets","Accounting Principles"]
+  "Grammar": ["Grammar"], "Formal Letter": ["Formal Letter"], "Speech": ["Speech"], "Prose": ["Prose"],
+  "Poetry": ["Poetry"], "Essay Writing": ["Essay Writing"], "Comprehension": ["Comprehension"],
+  "Algebra": ["Algebra"], "Linear Equations": ["Linear Equations"], "Quadratic Equations": ["Quadratic Equations"],
+  "Mensuration": ["Mensuration"], "Geometry": ["Geometry"], "Trigonometry": ["Trigonometry"],
+  "Sound": ["Sound"], "Electricity": ["Electricity"], "Light": ["Light"], "Force & Motion": ["Force & Motion"],
+  "Reproduction": ["Reproduction"], "Nutrition": ["Nutrition"],
+  "HTML": ["HTML"], "CSS": ["CSS"], "JavaScript": ["JavaScript"],
+  "AI Basics": ["AI Basics"], "Data Science": ["Data Science"]
 };
 
-// Flowchart bank with all subjects and topics for flowcharts
+// FLOWCHART DATA FOR 23 TOPICS
 const flowchartBank = {
-  "English":["Grammar","Essay Writing","Comprehension","Poetry Analysis","Speech Writing","Prose"],
-  "Hindi":["Grammar","Essay Writing","Comprehension","Poetry"],
-  "Mathematics":["Algebra","Geometry","Trigonometry","Probability","Statistics","Calculus","Mensuration"],
-  "Physics":["Mechanics","Electricity","Magnetism","Optics","Thermodynamics","Light","Sound"],
-  "Chemistry":["Physical Chemistry","Organic Chemistry","Inorganic Chemistry","Biochemistry"],
-  "Biology":["Anatomy","Physiology","Genetics","Reproduction","Nutrition","Ecology"],
-  "History":["Ancient","Medieval","Modern","World History","Indian History"],
-  "Geography":["Physical Geography","Human Geography","Economic Geography","Environmental Science"],
-  "Economics":["Microeconomics","Macroeconomics","Indian Economy","International Economics"],
-  "Political Science":["Political Theory","Indian Politics","International Relations","Comparative Politics"],
-  "Computer Science":["Programming","Data Structures","Algorithms","Database","Networking"],
-  "Psychology":["Developmental","Cognitive","Social","Abnormal Psychology"],
-  "Sociology":["Societal Structure","Culture","Social Change","Research Methods"],
-  "Business Studies":["Management","Marketing","Finance","Entrepreneurship"],
-  "Accountancy":["Bookkeeping","Financial Statements","Accounting Standards","Taxation"],
-  "Physical Education":["Fitness","Sports Science","Health Education","Nutrition"],
-  "Fine Arts":["Drawing","Painting","Sculpture","Art History"],
-  "Music":["Vocal","Instrumental","Theory","Composition"],
-  "Dance":["Classical","Folk","Contemporary","Choreography"],
-  "Home Science":["Nutrition","Family Resource Management","Child Development","Textiles"],
-  "Environmental Science":["Pollution","Conservation","Ecosystems","Climate Change"],
-  "AI Basics":["Machine Learning","Neural Networks","Deep Learning","Data Ethics","Robotics"],
-  "JavaScript":["Variables","Functions","Events","DOM Manipulation","AJAX","ES6 Features"],
-  "HTML":["Tags","Attributes","Forms","Tables","Multimedia","Semantic HTML"],
-  "CSS":["Selectors","Box Model","Flexbox","Grid","Animations","Responsive Design"],
-  "Data Science":["Data Collection","Cleaning","Visualization","Modeling","Inference","Machine Learning"],
-  "Formal Letter":["Format","Language","Closing","Styles","Business Letters"],
-  "Philosophy":["Metaphysics","Ethics","Logic","Epistemology","Political Philosophy"],
-  "Astronomy":["Solar System","Stars","Galaxies","Cosmology","Telescopes"],
-  "Law":["Constitutional Law","Criminal Law","Civil Law","International Law"],
-  "Marketing":["Market Research","Advertising","Branding","Digital Marketing"],
-  "Finance":["Investment","Banking","Financial Markets","Accounting Principles"]
+  "Grammar":["Parts of Speech","Nouns & Verbs","Adjectives","Sentence Structure","Tenses","Punctuation"],
+  "Formal Letter":["Format","Salutation","Body","Closing","Signature"],
+  "Speech":["Introduction","Main Points","Conclusion","Delivery Tips"],
+  "Prose":["Main Idea","Characters","Plot","Theme","Literary Devices"],
+  "Poetry":["Rhyme Scheme","Meter","Imagery","Tone","Structure"],
+  "Essay Writing":["Thesis","Introduction","Body Paragraphs","Conclusion"],
+  "Comprehension":["Skimming","Scanning","Main Idea","Inference"],
+  "Algebra":["Variables","Expressions","Equations","Inequalities","Functions"],
+  "Linear Equations":["Standard Form","Slope Intercept","Graphing","Systems"],
+  "Quadratic Equations":["Factoring","Quadratic Formula","Discriminant","Graphing"],
+  "Mensuration":["Area Formulas","Volume Formulas","Surface Area"],
+  "Geometry":["Triangles","Circles","Polygons","Theorems"],
+  "Trigonometry":["Sine Cosine","Tan Identities","Triangles"],
+  "Sound":["Waves","Frequency","Pitch","Echo"],
+  "Electricity":["Current","Voltage","Resistance","Circuits"],
+  "Light":["Reflection","Refraction","Lenses","Colors"],
+  "Force & Motion":["Newton's Laws","Acceleration","Friction"],
+  "Reproduction":["Asexual","Sexual","Human System"],
+  "Nutrition":["Carbohydrates","Proteins","Vitamins","Diet"],
+  "HTML":["Tags","Elements","Attributes","Structure"],
+  "CSS":["Selectors","Properties","Box Model","Flexbox"],
+  "JavaScript":["Variables","Functions","Events","DOM"],
+  "AI Basics":["Machine Learning","Neural Networks","Data","Ethics"],
+  "Data Science":["Data Cleaning","Visualization","Modeling","Insights"]
 };
 
-// Quiz banks extended for all subjects (partial sample, add more questions as needed)
+// QUIZ DATA FOR 23 TOPICS (2 questions each)
 const quizBank = {
-  "English": [
-    {q:"Identify the adjective: The tall man arrived.", options:["tall","man","arrived","The"], answer:"tall"},
-    {q:"What is the past tense of 'go'?", options:["went","goed","gone","goes"], answer:"went"},
-    {q:"Choose the correct punctuation: She said __ I am coming.", options:["\"","'","“","”"], answer:"\""},
-    {q:"Write synonym of 'Happy'", options:["Joyful","Sad","Angry","Tired"], answer:"Joyful"},
-    {q:"Identify the subject: The cat sleeps.", options:["The cat","sleeps","cat","The"], answer:"The cat"}
-  ],
-  "Hindi": [
-    {q:"Convert the sentence: मैं खाना खा रहा हूँ।", options:["I am eating food.","He is eating.","You eat.","They eat."], answer:"I am eating food."},
-    {q:"What is स्वर (Vowel)?", options:["अ,आ,इ,ई","क,ख,ग","प,फ","त,थ"], answer:"अ,आ,इ,ई"}
-  ],
-  "Mathematics": [
-    {q:"What is 7 + 8?", options:["15","14","13","16"], answer:"15"},
-    {q:"Solve for x: 2x = 10", options:["5","4","6","10"], answer:"5"},
-    {q:"What is the area of a rectangle of length 5 and width 3?", options:["15","8","10","20"], answer:"15"},
-    {q:"Simplify: 5 * (2 + 3)", options:["25","15","10","5"], answer:"25"}
-  ],
-  "Physics": [
-    {q:"Unit of force?", options:["Newton","Joule","Watt","Pascal"], answer:"Newton"},
-    {q:"Speed formula?", options:["Distance/Time","Time/Distance","Speed*Time","Speed/Time"], answer:"Distance/Time"}
-  ],
-  "Chemistry": [
-    {q:"H2O is?", options:["Water","Oxygen","Hydrogen","Carbon dioxide"], answer:"Water"},
-    {q:"Atomic number represents?", options:["Number of protons","Number of neutrons","Number of electrons","Atomic mass"], answer:"Number of protons"}
-  ],
-  "Biology":[
-    {q:"What is the function of mitochondria?", options:["Energy production","Protein synthesis","Digestion","Respiration"], answer:"Energy production"},
-    {q:"DNA is the carrier of?", options:["Genetic Information","Energy","Enzymes","Hormones"], answer:"Genetic Information"}
-  ],
-  "History":[
-    {q:"Who was the first President of India?", options:["Dr. Rajendra Prasad","Mahatma Gandhi","Jawaharlal Nehru","Subhash Chandra Bose"], answer:"Dr. Rajendra Prasad"},
-    {q:"The Battle of Plassey was fought in?", options:["1757","1857","1947","1600"], answer:"1757"}
-  ],
-  "Geography":[
-    {q:"What is the largest continent?", options:["Asia","Africa","Europe","Australia"], answer:"Asia"},
-    {q:"The longest river in the world is?", options:["Nile","Amazon","Yangtze","Mississippi"], answer:"Nile"}
-  ],
-  "Economics":[
-    {q:"What does GDP stand for?", options:["Gross Domestic Product","General Domestic Product","Great Domestic Product","General Department Product"], answer:"Gross Domestic Product"},
-    {q:"Demand increases when price?", options:["Decreases","Increases","Remains constant","Is zero"], answer:"Decreases"}
-  ],
-  "Political Science":[
-    {q:"Who is called the Father of Indian Constitution?", options:["B.R. Ambedkar","Mahatma Gandhi","Jawaharlal Nehru","Rajendra Prasad"], answer:"B.R. Ambedkar"}
-  ],
-  // Similarly fill quizBank for Computer Science, Psychology, Sociology, Business Studies, Accountancy, Physical Education, Fine Arts, Music,
-  // Dance, Home Science, Environmental Science, AI Basics, JavaScript, HTML, CSS, Data Science, Formal Letter, Philosophy, Astronomy, Law,
-  // Marketing, Finance (to maintain brevity some only partially shown here, extend similarly)
+  "Grammar":[{"q":"What describes a noun?","options":["Adjective","Verb","Noun","Adverb"],"answer":"Adjective"},
+            {"q":"Tenses show?","options":["Time","Place","Person","Number"],"answer":"Time"}],
+  "Formal Letter":[{"q":"Letter starts with?","options":["Date","Dear Sir","Subject","Yours"],"answer":"Date"},
+                  {"q":"Ends with?","options":["Yours faithfully","Dear Sir","Subject","Address"],"answer":"Yours faithfully"}],
+  "Speech":[{"q":"Speech needs?","options":["Introduction","Long words","Memorizing","Shouting"],"answer":"Introduction"},
+           {"q":"Good speech has?","options":["Conclusion","Jokes","Stories","Facts"],"answer":"Conclusion"}],
+  "Prose":[{"q":"Prose has?","options":["Characters","Rhyme","Meter","Stanzas"],"answer":"Characters"},
+          {"q":"Main idea is?","options":["Theme","Plot","Setting","Conflict"],"answer":"Theme"}],
+  "Poetry":[{"q":"Rhyme is?","options":["Sound match","Word match","Letter match","Syllable"],"answer":"Sound match"},
+           {"q":"Poetry uses?","options":["Imagery","Prose","Dialogue","Lists"],"answer":"Imagery"}],
+  "Essay Writing":[{"q":"Essay needs?","options":["Thesis","Poem","Story","Letter"],"answer":"Thesis"},
+                  {"q":"Body has?","options":["Arguments","Introduction","Conclusion"],"answer":"Arguments"}],
+  "Comprehension":[{"q":"Skimming finds?","options":["Main idea","Details","Examples"],"answer":"Main idea"},
+                  {"q":"Inference uses?","options":["Text clues","Memories","Guesses"],"answer":"Text clues"}],
+  "Algebra":[{"q":"x + 5 = 10, x=?","options":["5","15","10","0"],"answer":"5"},
+            {"q":"2x = 8, x=?","options":["4","16","2","8"],"answer":"4"}],
+  "Linear Equations":[{"q":"y = mx + c is?","options":["Line","Circle","Parabola"],"answer":"Line"},
+                     {"q":"Slope means?","options":["Steepness","Curve","Intercept"],"answer":"Steepness"}],
+  "Quadratic Equations":[{"q":"x² form?","options":["Parabola","Line","Circle"],"answer":"Parabola"},
+                        {"q":"Roots from?","options":["Formula","Addition"],"answer":"Formula"}],
+  "Mensuration":[{"q":"Area of rectangle?","options":["l×w","l+w","l/w"],"answer":"l×w"},
+                {"q":"Volume cube?","options":["l³","l²","l"],"answer":"l³"}],
+  "Geometry":[{"q":"Triangle angles?","options":["180°","360°","90°"],"answer":"180°"},
+             {"q":"Circle has?","options":["360°","180°","90°"],"answer":"360°"}],
+  "Trigonometry":[{"q":"sin 90°?","options":["1","0","0.5"],"answer":"1"},
+                 {"q":"SOH CAH TOA?","options":["Trig ratios","Angles","Sides"],"answer":"Trig ratios"}],
+  "Sound":[{"q":"Pitch from?","options":["Frequency","Amplitude"],"answer":"Frequency"},
+          {"q":"Echo needs?","options":["Reflection","Absorption"],"answer":"Reflection"}],
+  "Electricity":[{"q":"V=IR is?","options":["Ohm's Law","Newton's Law"],"answer":"Ohm's Law"},
+                {"q":"Current flows?","options":["Circuit","Wire only"],"answer":"Circuit"}],
+  "Light":[{"q":"Mirror does?","options":["Reflection","Refraction"],"answer":"Reflection"},
+          {"q":"Prism makes?","options":["Rainbow","White light"],"answer":"Rainbow"}],
+  "Force & Motion":[{"q":"F=ma means?","options":["Acceleration","Speed"],"answer":"Acceleration"},
+                   {"q":"Friction?","options":["Opposes motion","Helps motion"],"answer":"Opposes motion"}],
+  "Reproduction":[{"q":"Asexual needs?","options":["One parent","Two parents"],"answer":"One parent"},
+                 {"q":"Sexual needs?","options":["Two parents","One parent"],"answer":"Two parents"}],
+  "Nutrition":[{"q":"Carbs give?","options":["Energy","Strength"],"answer":"Energy"},
+              {"q":"Proteins build?","options":["Muscles","Bones"],"answer":"Muscles"}],
+  "HTML":[{"q":"HTML tag?","options":["<p>","{p}","[p]"],"answer":"<p>"},
+         {"q":"DOCTYPE first?","options":["Yes","No"],"answer":"Yes"}],
+  "CSS":[{"q":"CSS selector?","options":["p {}","p","paragraph"],"answer":"p {}"},
+        {"q":"color: red; is?","options":["Property","Selector"],"answer":"Property"}],
+  "JavaScript":[{"q":"var x = 5; is?","options":["Variable","Function"],"answer":"Variable"},
+               {"q":"onclick=?","options":["Event","Style"],"answer":"Event"}],
+  "AI Basics":[{"q":"AI learns from?","options":["Data","Code"],"answer":"Data"},
+              {"q":"Neural net like?","options":["Brain","Calculator"],"answer":"Brain"}],
+  "Data Science":[{"q":"Data cleaning?","options":["Prepare data","Collect data"],"answer":"Prepare data"},
+                 {"q":"Charts show?","options":["Patterns","Numbers"],"answer":"Patterns"}]
 };
 
-// Worksheet Bank for all subjects with varied question types for teachers and practice
+// WORKSHEET DATA FOR 23 TOPICS
 const wsBank = {
-  "English":[
-    {q:"Write a paragraph on your favorite hobby.", type:"long-answer"},
-    {q:"Identify parts of speech in a given sentence.", type:"exercise"}
-  ],
-  "Hindi":[
-    {q:"Translate: मेरा नाम ... है।", type:"short-answer"},
-    {q:"Write five nouns in Hindi.", type:"list"}
-  ],
-  "Mathematics":[
-    {q:"Solve: 3x + 7 = 22", type:"short-answer"},
-    {q:"Factorize: x² - 16", type:"short-answer"}
-  ],
-  "Physics":[
-    {q:"Define velocity and acceleration with examples.", type:"short-answer"},
-    {q:"Draw and label parts of a simple electric circuit.", type:"drawing"}
-  ],
-  "Chemistry":[
-    {q:"Explain the pH scale.", type:"short-answer"},
-    {q:"Write the symbols of three elements.", type:"list"}
-  ],
-  "Biology":[
-    {q:"Draw the structure of a plant cell.", type:"drawing"},
-    {q:"Explain the process of photosynthesis.", type:"explanation"}
-  ],
-  "History":[
-    {q:"Write about the Indian independence movement.", type:"long-answer"},
-    {q:"List main events of World War II.", type:"list"}
-  ],
-  "Geography":[
-    {q:"Label continents on a blank map.", type:"map"},
-    {q:"Explain the water cycle.", type:"explanation"}
-  ],
-  // Similarly add worksheets for all subjects optionally
+  "Grammar":["Identify 5 nouns","Write 3 sentences","Find adjectives","Practice tenses","Punctuation drill"],
+  "Formal Letter":["Write complete letter","Practice salutation","Body 3 paragraphs","Closing format"],
+  "Speech":["Write 2 min speech","Practice introduction","3 main points","Strong conclusion"],
+  "Prose":["Summary in 5 sentences","Character analysis","Find main theme"],
+  "Poetry":["Identify rhyme scheme","Find 3 imagery examples","Analyze tone"],
+  "Essay Writing":["Thesis statement","3 body paragraphs","Strong conclusion"],
+  "Comprehension":["Read & answer 5 questions","Find main idea","Make inferences"],
+  "Algebra":["Solve 5 equations","Simplify expressions","Word problems"],
+  "Linear Equations":["Graph 3 lines","Find slope","Systems of equations"],
+  "Quadratic Equations":["Factor 3 quadratics","Use formula","Graph parabola"],
+  "Mensuration":["10 area problems","5 volume problems"],
+  "Geometry":["Triangle theorems","Circle properties"],
+  "Trigonometry":["Solve triangle","Find angles"],
+  "Sound":["Wave properties","Echo experiment"],
+  "Electricity":["Circuit diagram","Ohm's law problems"],
+  "Light":["Reflection laws","Lens experiments"],
+  "Force & Motion":["Newton's laws examples","Motion graphs"],
+  "Reproduction":["Diagram labeling","Process description"],
+  "Nutrition":["Food groups chart","Balanced diet"],
+  "HTML":["Create webpage","5 different tags"],
+  "CSS":["Style 3 elements","Make responsive"],
+  "JavaScript":["3 event handlers","Simple function"],
+  "AI Basics":["AI ethics discussion","ML example"],
+  "Data Science":["Clean dataset","Create 2 charts"]
 };
 
-// AI Chat bank: example prompts & responses for all subject categories
-const aiChatBank = {
-  "English":["Help me improve my essay writing.","Explain the use of metaphors in poetry."],
-  "Hindi":["मुझे हिंदी व्याकरण समझाइए।","हिंदी कविताओं के प्रकार क्या हैं?"],
-  "Mathematics":["Explain quadratic equations.","Help me solve this algebra problem."],
-  "Physics":["What are Newton's laws?","Explain the concept of energy conservation."],
-  "Chemistry":["Describe the periodic table.","Explain acids and bases."],
-  "Biology":["What is DNA?","Explain photosynthesis."],
-  "History":["Tell me about the French Revolution.","Explain the significance of the Indian Constitution."],
-  "Geography":["Describe types of climate zones.","What causes earthquakes?"],
-  "Economics":["Explain supply and demand.","What is inflation?"],
-  "Political Science":["Describe democracy.","What is the role of the United Nations?"],
-  "Computer Science":["Explain loops in programming.","What is a database?"],
-  "Psychology":["What is cognitive dissonance?","Describe the stages of development."],
-  "Sociology":["Explain social stratification.","What is culture?"],
-  "Business Studies":["What is marketing?","Explain financial management."],
-  "Accountancy":["Describe double-entry bookkeeping.","Explain balance sheets."],
-  "Physical Education":["What are aerobic exercises?","Explain nutrition fundamentals."],
-  "Fine Arts":["What is impressionism?","Describe sculpture techniques."],
-  "Music":["Explain music theory basics.","What are musical scales?"],
-  "Dance":["Describe classical dance forms.","Explain choreography basics."],
-  "Home Science":["Explain child development stages.","What is family resource management?"],
-  "Environmental Science":["Explain pollution types.","What is climate change?"],
-  "AI Basics":["What is machine learning?","Explain neural networks."],
-  "JavaScript":["How to add event listeners?","Explain closures in JS."],
-  "HTML":["What are semantic tags?","How to create a form?"],
-  "CSS":["Explain flexbox layout.","How to create animations?"],
-  "Data Science":["What is data cleaning?","Explain data visualization."],
-  "Formal Letter":["How to write a business letter?","Explain letter formatting."],
-  "Philosophy":["What is metaphysics?","Describe ethical theories."],
-  "Astronomy":["Explain black holes.","What is the Big Bang theory?"],
-  "Law":["What is criminal law?","Explain constitutional law basics."],
-  "Marketing":["Describe advertising strategies.","What is digital marketing?"],
-  "Finance":["Explain investment basics.","What are financial markets?"]
+// AI CHAT RESPONSES
+const aiResponses = {
+  "Grammar": ["Grammar helps structure sentences clearly. Need help with tenses, parts of speech, or punctuation?", "Try identifying nouns, verbs, adjectives in this sentence: 'The quick brown fox jumps.'"],
+  "Algebra": ["Algebra uses variables like x and y. Solve: 2x + 3 = 7 → x = 2. Need more examples?", "Practice simplifying: 3x + 2x - x = ?"],
+  "HTML": ["HTML uses tags like <p> for paragraphs. Try: <h1>Title</h1><p>Text</p>", "Structure: DOCTYPE → html → head → body"],
+  "Electricity": ["V = I × R (Ohm's Law). Voltage = Current × Resistance.", "Series circuits: total R adds up. Parallel: 1/R total = sum of 1/Rs"]
 };
 
-// Initialize App - this function and existing features remain unchanged, just re-use extended banks
+// HOMEWORK STORAGE
+let homeworkSubmissions = JSON.parse(localStorage.getItem('sterlaHomework') || '{}');
+let quizReviews = JSON.parse(localStorage.getItem('sterlaQuizReviews') || '{}');
 
-function navigate(event) {
-  // navigation logic unchanged
-  const buttons = document.querySelectorAll('#sidebar .nav-btn');
-  buttons.forEach(b => b.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-  const page = event.currentTarget.dataset.page;
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(page).classList.add('active');
+function initApp() {
+  document.getElementById('welcomeUser').textContent = userName;
+  updateRoleDisplay();
+  loadSubjects();
+  showToast('Welcome to STERLA! ✨ All 23 topics + Teacher Dashboard + AI Notes ready!', 'success');
+}
+
+function updateWelcomeMessage() {
+  const welcomeMsgEl = document.getElementById('welcomeMessage');
+  if(userRole === 'Student') {
+    welcomeMsgEl.innerHTML = '🚀 Your AI learning companion, here to help you study and succeed!';
+  } else if(userRole === 'Teacher') {
+    welcomeMsgEl.innerHTML = '📊 Teacher Dashboard: Manage subjects, homework, and quizzes efficiently.';
+  }
+}
+
+function updateRoleDisplay() {
+  document.getElementById('roleIndicator').textContent = userRole;
+  document.getElementById('welcomeUser').textContent = userRole;
+  const hwRole = document.getElementById('hwRoleIndicator');
+  const quizRole = document.getElementById('quizRoleIndicator');
+  if (hwRole) hwRole.textContent = `(${userRole})`;
+  if (quizRole) quizRole.textContent = `(${userRole})`;
+ 
+  document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+  event?.target?.classList.add('active') || document.querySelector(`[onclick="switchRole('${userRole}')"]`).classList.add('active');
+
+  updateWelcomeMessage();
 }
 
 function switchRole(role) {
   userRole = role;
-  document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('.role-btn').forEach(btn => {
-    if(btn.textContent === role) btn.classList.add('active');
-  });
-  document.getElementById('roleIndicator').textContent = role;
-  document.getElementById('welcomeUser').textContent = role;
+  userName = role;
   updateRoleDisplay();
-  showToast(`Switched to ${role} role`, 'success');
+  localStorage.setItem('sterlaRole', userRole);
+  showToast(`Switched to ${role} Dashboard! ✨`, 'success');
+ 
+  const activePage = document.querySelector('.page.active');
+  if (activePage.id === 'hwPage') loadHomework();
+  if (activePage.id === 'quizPage') loadQuiz();
 }
 
-function updateRoleDisplay() {
-  if(userRole === "Teacher"){
-    // example feature unlock or UI hints
-    // Could show teacher-only items or extra help in real app
-  } else {
-    // reset or show student view
+// NAVIGATION
+function navigate(e){
+  document.querySelectorAll('.nav-btn').forEach(btn=>btn.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  const pageId = e.currentTarget.dataset.page;
+  document.querySelectorAll('.page').forEach(page=>page.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+ 
+  if(pageId === 'subjectsPage') loadSubjects();
+  if(pageId === 'topicPage' && selectedSubject) renderTopics();
+  if(pageId === 'mindmapPage') updateFlowchartTopics();
+  if(pageId === 'quizPage') loadQuiz();
+  if(pageId === 'wsPage') loadWorksheet();
+  if(pageId === 'hwPage') loadHomework();
+}
+
+// SUBJECTS - SHOW ALL 23
+function loadSubjects(){
+  const quick = document.getElementById('subjectsQuick');
+  const list = document.getElementById('subjectsList');
+  quick.innerHTML = ''; list.innerHTML = '';
+ 
+  subjects.forEach(subject => {
+    if(subjectTopics[subject]){
+      const btnQuick = document.createElement('button');
+      btnQuick.className = 'subject-card';
+      btnQuick.textContent = subject;
+      btnQuick.onclick = () => selectSubject(subject);
+      quick.appendChild(btnQuick);
+     
+      const btnList = document.createElement('button');
+      btnList.className = 'subject-card';
+      btnList.textContent = subject;
+      btnList.onclick = () => selectSubject(subject);
+      list.appendChild(btnList);
+    }
+  });
+}
+
+function selectSubject(subject){
+  selectedSubject = subject;
+  chosenTopic = subjectTopics[subject][0];
+  navigate({currentTarget: {dataset: {page: 'topicPage'}}});
+  updateFlowchartTopics();
+  showToast(`Selected: ${subject} ✨`, 'success');
+}
+
+function renderTopics(){
+  const container = document.getElementById('topicsList');
+  container.innerHTML = '';
+  if(!selectedSubject) return;
+  subjectTopics[selectedSubject].forEach(topic => {
+    const btn = document.createElement('button');
+    btn.className = 'subject-card';
+    btn.textContent = topic;
+    btn.onclick = () => {
+      chosenTopic = topic;
+      showToast(`Topic: ${topic} ✅`, 'success');
+      updateFlowchartTopics();
+    };
+    container.appendChild(btn);
+  });
+}
+
+function updateFlowchartTopics(){
+  const select = document.getElementById('flowTopicSelect');
+  if(!selectedSubject){
+    select.innerHTML = '<option value="">Choose subject first</option>';
+    return;
+  }
+  select.innerHTML = '<option value="">Select topic...</option>' +
+    subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+
+// FLOWCHART - ENHANCED WITH CLICKABLE EXPANDABLE NODES
+function generateFlowchart(){
+  const topic = document.getElementById('flowTopicSelect').value;
+  const statusEl = document.getElementById('flowchartStatus');
+  const svg = document.getElementById('flowSvg');
+ 
+  if(!topic || !flowchartBank[topic]){
+    statusEl.textContent = 'Select any of 23 topics';
+    return;
+  }
+ 
+  svg.innerHTML = '';
+  const data = flowchartBank[topic];
+  const width = 900, height = 600;
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+ 
+  const nodeWidth = 200, nodeHeight = 65, startY = 70, vGap = 85;
+ 
+  data.forEach((text, i) => {
+    const x = (width - nodeWidth) / 2;
+    const y = startY + i * vGap;
+   
+    // Main node
+    const node = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    node.setAttribute('x', x);
+    node.setAttribute('y', y);
+    node.setAttribute('width', nodeWidth);
+    node.setAttribute('height', nodeHeight);
+    node.setAttribute('rx', '12');
+    node.setAttribute('ry', '12');
+    node.setAttribute('class', 'flow-node');
+    node.id = `node-${i}`;
+    svg.appendChild(node);
+   
+    // Main text
+    const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    txt.setAttribute('x', x + nodeWidth/2);
+    txt.setAttribute('y', y + nodeHeight/2 + 5);
+    txt.setAttribute('class', 'flow-text');
+    txt.textContent = text;
+    txt.setAttribute('text-anchor', 'middle');
+    svg.appendChild(txt);
+
+    // Expanded tooltip content
+    const tooltipContent = getTooltipContent(topic, text);
+   
+    // Tooltip background
+    const tooltipBg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    tooltipBg.setAttribute('x', x - 10);
+    tooltipBg.setAttribute('y', y + nodeHeight + 10);
+    tooltipBg.setAttribute('width', nodeWidth + 20);
+    tooltipBg.setAttribute('height', 0);
+    tooltipBg.setAttribute('rx', '8');
+    tooltipBg.setAttribute('ry', '8');
+    tooltipBg.setAttribute('fill', 'rgba(194,179,255,0.95)');
+    tooltipBg.style.transition = 'all 0.3s ease';
+    tooltipBg.style.opacity = '0';
+    svg.appendChild(tooltipBg);
+   
+    // Tooltip text
+    const tooltip = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    tooltip.setAttribute('x', x + nodeWidth/2);
+    tooltip.setAttribute('y', y + nodeHeight + 30);
+    tooltip.setAttribute('class', 'flow-node-tooltip');
+    tooltip.setAttribute('text-anchor', 'middle');
+    tooltip.style.opacity = '0';
+    tooltip.style.transition = 'opacity 0.3s ease';
+    tooltip.style.pointerEvents = 'none';
+    tooltip.textContent = tooltipContent;
+    tooltip.id = `tooltip-${i}`;
+    svg.appendChild(tooltip);
+
+    // Click handler for expand/collapse
+    node.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isExpanded = node.classList.contains('expanded');
+     
+      if (isExpanded) {
+        // Collapse
+        node.setAttribute('height', nodeHeight);
+        tooltipBg.setAttribute('height', 0);
+        tooltip.style.opacity = '0';
+        tooltipBg.style.opacity = '0';
+        node.classList.remove('expanded');
+        showToast('Collapsed', 'success');
+      } else {
+        // Expand
+        node.setAttribute('height', nodeHeight + 60);
+        tooltipBg.setAttribute('height', 45);
+        tooltip.style.opacity = '1';
+        tooltipBg.style.opacity = '1';
+        node.classList.add('expanded');
+        showToast('Expanded details', 'success');
+      }
+    });
+   
+    if(i < data.length - 1){
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', x + nodeWidth/2);
+      line.setAttribute('y1', y + nodeHeight);
+      line.setAttribute('x2', x + nodeWidth/2);
+      line.setAttribute('y2', y + nodeHeight + vGap - 50);
+      line.setAttribute('class', 'flow-line');
+      svg.appendChild(line);
+    }
+  });
+  statusEl.textContent = `✨ Flowchart: ${topic} (${data.length} steps) - Click nodes to expand!`;
+  showToast('Flowchart generated! Click any node to see detailed info ✨', 'success');
+}
+
+function getTooltipContent(topic, nodeText) {
+  const tooltips = {
+    "Grammar": {
+      "Parts of Speech": "Nouns, pronouns, verbs, adjectives, adverbs, prepositions, conjunctions, interjections",
+      "Nouns & Verbs": "Nouns: person/place/thing. Verbs: action/state of being",
+      "Adjectives": "Describes nouns: size, color, number, quality"
+    },
+    "Algebra": {
+      "Variables": "Letters representing unknown numbers (x, y, z)",
+      "Equations": "Mathematical statements with = sign"
+    }
+  };
+  return tooltips[topic]?.[nodeText] || `Detailed explanation of "${nodeText}" for ${topic}`;
+}
+
+// QUIZ - STUDENT MODE / TEACHER REVIEW MODE
+function loadQuiz(){
+  const statusEl = document.getElementById('quizStatus');
+  const outputEl = document.getElementById('quizOutput');
+  const role = userRole;
+ 
+  if(role === 'Student') {
+    if(!chosenTopic || !quizBank[chosenTopic]){
+      statusEl.textContent = 'Select any of 23 topics first';
+      return;
+    }
+    statusEl.textContent = `🎯 Quiz: ${chosenTopic} (2 questions)`;
+    let html = '';
+    quizBank[chosenTopic].forEach((q, idx) => {
+      html += `<div style="margin-bottom:25px;padding:20px;background:rgba(255,255,255,0.05);border-radius:12px;border-left:4px solid var(--light-blue);">
+        <p style="font-weight:700;margin-bottom:15px;color:var(--light-blue);">Q${idx+1}: ${q.q}</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">`;
+      q.options.forEach(option => {
+        html += `<button class="quiz-btn" onclick="checkAnswer(${idx}, '${option.replace(/'/g, "\\'")}', this)">${option}</button>`;
+      });
+      html += '</div></div>';
+    });
+    outputEl.innerHTML = html;
+  } else { // Teacher mode - Quiz Checker
+    statusEl.textContent = `📊 Review Student Quiz Answers`;
+    let html = '<h4 style="color:var(--light-blue);margin-bottom:15px;font-weight:700;">Recent Quiz Submissions</h4>';
+   
+    const studentReviews = Object.entries(quizReviews).filter(([key]) => !key.startsWith('Teacher_'));
+    if(studentReviews.length === 0) {
+      html += '<p style="color:var(--muted);">No quiz submissions yet</p>';
+    } else {
+      studentReviews.slice(-5).reverse().forEach(([key, review]) => {
+        html += `
+          <div class="quiz-review-item">
+            <div><strong>${key}:</strong> ${review.answers.join(', ')}</div>
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="btn-small" onclick="reviewQuiz('${key}', 'correct')" style="background:var(--success);">✅ Correct</button>
+              <button class="btn-small" onclick="reviewQuiz('${key}', 'incorrect')" style="background:var(--danger);">❌ Needs Work</button>
+              <button class="btn-small" onclick="reviewQuiz('${key}', 'review')" style="background:var(--light-blue);">⏳ Review Later</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+    outputEl.innerHTML = html;
   }
 }
 
-function showToast(message, type='success'){
+function checkAnswer(qIndex, selected, btn){
+  const questions = quizBank[chosenTopic];
+  const correct = questions[qIndex].answer;
+  if(selected === correct){
+    btn.classList.add('correct');
+    btn.innerHTML += ' ✅';
+    showToast('Correct! 🎉', 'success');
+   
+    // Save student answer for teacher review
+    const key = `${userName}_${chosenTopic}_${Date.now()}`;
+    if(!quizReviews[key]) {
+      quizReviews[key] = {
+        topic: chosenTopic,
+        answers: [],
+        timestamp: new Date().toLocaleString()
+      };
+    }
+    quizReviews[key].answers[qIndex] = selected;
+    localStorage.setItem('sterlaQuizReviews', JSON.stringify(quizReviews));
+  } else {
+    btn.classList.add('wrong');
+    btn.innerHTML += ' ❌';
+    showToast(`Correct: ${correct}`, 'error');
+  }
+  btn.style.pointerEvents = 'none';
+}
+
+function reviewQuiz(key, status) {
+  if(quizReviews[key]) {
+    quizReviews[key].reviewed = true;
+    quizReviews[key].status = status;
+    quizReviews[`Teacher_${key}_${Date.now()}`] = {
+      action: status,
+      timestamp: new Date().toLocaleString()
+    };
+    localStorage.setItem('sterlaQuizReviews', JSON.stringify(quizReviews));
+    showToast(`Quiz ${status}! ✅`, 'success');
+    loadQuiz();
+  }
+}
+
+// WORKSHEET - FULLY WORKING FOR 23 TOPICS
+function loadWorksheet(){
+  const statusEl = document.getElementById('wsStatus');
+  const outputEl = document.getElementById('wsOutput');
+  if(!chosenTopic || !wsBank[chosenTopic]){
+    statusEl.textContent = 'Select any of 23 topics first';
+    return;
+  }
+  statusEl.textContent = `📝 Worksheet: ${chosenTopic} (${wsBank[chosenTopic].length} tasks)`;
+  const tasks = wsBank[chosenTopic];
+  let html = '<ol style="margin:0;padding-left:25px;">';
+  tasks.forEach(task => {
+    html += `<li style="margin-bottom:18px;font-size:16px;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid var(--light-purple);font-weight:600;">${task}</li>`;
+  });
+  html += '</ol>';
+  outputEl.innerHTML = html;
+}
+
+// HOMEWORK - ENHANCED TEACHER DASHBOARD
+function loadHomework(){
+  const statusEl = document.getElementById('hwStatus');
+  const outputEl = document.getElementById('hwOutput');
+  const role = userRole;
+ 
+  if(role === 'Student') {
+    statusEl.textContent = `✏️ Submit Homework for ${chosenTopic || 'any topic'}`;
+    let html = '<div class="hw-submit">';
+    if(chosenTopic) {
+      html += `
+        <textarea id="hwText" placeholder="Write your homework answers for ${chosenTopic}..."></textarea>
+        <button class="btn" onclick="submitHomework()" style="width:100%;">📤 Submit Homework</button>
+      `;
+    } else {
+      html += '<p style="color:var(--muted);">Select a topic first</p>';
+    }
+    html += '</div>';
+   
+    // Show submission history
+    const studentSubs = Object.entries(homeworkSubmissions).filter(([key]) => key.startsWith(`${userName}_`));
+    if(studentSubs.length > 0) {
+      html += '<h4 style="color:var(--light-blue);margin:20px 0 10px 0;font-weight:700">📋 Your Submissions</h4>';
+      studentSubs.slice(-3).reverse().forEach(([key, sub]) => {
+        html += `<div class="hw-item ${sub.graded ? (sub.grade === 'approved' ? 'graded' : 'rejected') : ''}">
+          <strong>${key.split('_')[1]}:</strong> ${sub.text.substring(0,100)}...
+          ${sub.graded ? `<span style="float:right;font-size:14px;font-weight:700;">${sub.grade === 'approved' ? '✅ APPROVED' : '❌ REJECTED'}</span>` : ''}
+        </div>`;
+      });
+    }
+    outputEl.innerHTML = html;
+  } else { // Teacher Dashboard
+    statusEl.textContent = `👨‍🏫 Teacher Dashboard - Grade Homework`;
+    let html = '<h4 style="color:var(--light-blue);margin-bottom:15px;font-weight:700;">📥 Pending Student Homework</h4>';
+   
+    const teacherSubs = Object.entries(homeworkSubmissions).filter(([key]) => !key.startsWith('Teacher_') && !homeworkSubmissions[key]?.graded);
+    if(teacherSubs.length === 0) {
+      html += '<p style="color:var(--muted);">No pending homework - Great job! 🎉</p>';
+    } else {
+      teacherSubs.slice(-5).forEach(([key, sub]) => {
+        html += `
+          <div class="hw-item">
+            <div><strong>${key}:</strong> ${sub.text.substring(0,80)}...</div>
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn" onclick="gradeHomework('${key}', 'approved')" style="background:var(--success);flex:1;font-size:14px;">✅ Approve</button>
+              <button class="btn" onclick="gradeHomework('${key}', 'rejected')" style="background:var(--danger);flex:1;font-size:14px;">❌ Reject</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+    outputEl.innerHTML = html;
+  }
+}
+
+function submitHomework() {
+  if(!chosenTopic) return showToast('Select topic first!', 'error');
+  const text = document.getElementById('hwText').value.trim();
+  if(!text) return showToast('Write some homework!', 'error');
+ 
+  const key = `${userName}_${chosenTopic}_${Date.now()}`;
+  homeworkSubmissions[key] = {
+    topic: chosenTopic,
+    text: text,
+    timestamp: new Date().toLocaleString(),
+    graded: false
+  };
+  localStorage.setItem('sterlaHomework', JSON.stringify(homeworkSubmissions));
+  showToast('Homework submitted! Wait for teacher approval 🎓', 'success');
+  document.getElementById('hwText').value = '';
+  loadHomework();
+}
+
+function gradeHomework(key, grade) {
+  if(homeworkSubmissions[key]) {
+    homeworkSubmissions[key].graded = true;
+    homeworkSubmissions[key].grade = grade;
+    homeworkSubmissions[`Teacher_${key}_${Date.now()}`] = {
+      action: grade,
+      timestamp: new Date().toLocaleString()
+    };
+    localStorage.setItem('sterlaHomework', JSON.stringify(homeworkSubmissions));
+    showToast(`Homework ${grade}! ✅`, 'success');
+    loadHomework();
+  }
+}
+
+// AI NOTES SUMMARIZER
+function generateSummary() {
+  const input = document.getElementById('notesInput').value.trim();
+  const statusEl = document.getElementById('notesStatus');
+  const summaryEl = document.getElementById('notesSummary');
+ 
+  if(!input) {
+    statusEl.textContent = 'Please enter some text to summarize';
+    return;
+  }
+ 
+  statusEl.textContent = '✨ AI is summarizing your notes...';
+ 
+  // Simulate AI summarization (intelligent truncation + key points)
+  setTimeout(() => {
+    const words = input.split(' ');
+    let summary = '';
+   
+    if(words.length > 50) {
+      // Extract first sentence + key points
+      const firstSentence = input.split('.')[0] + '.';
+      const keyWords = words.slice(0, 20).filter(word => word.length > 4 && !['the','and','for','with','this'].includes(word.toLowerCase()));
+      summary = `${firstSentence} Key points: ${keyWords.slice(0,8).join(', ')}... (${words.length} words → ${Math.floor(words.length/4)} key ideas)`;
+    } else {
+      summary = `Your notes are already concise! (${words.length} words)`;
+    }
+   
+    summaryEl.innerHTML = `<strong>✨ AI Summary:</strong><br>${summary}`;
+    summaryEl.style.display = 'block';
+    statusEl.textContent = `✅ Summary generated! (${input.split(' ').length} → ${summary.split(' ').length} words)`;
+    showToast('AI Notes summary ready! ✨', 'success');
+  }, 1200);
+}
+
+// AI CHAT - FULLY WORKING + TOPIC AWARE
+function sendMessage(){
+  const input = document.getElementById('chatInput');
+  const chatBox = document.getElementById('chatBox');
+  const msg = input.value.trim();
+  if(!msg) return;
+ 
+  chatBox.innerHTML += `<div style="margin-bottom:12px;padding:12px;background:rgba(255,255,255,0.05);border-radius:10px;"><strong>${userRole}:</strong> ${msg}</div>`;
+  input.value = '';
+  chatBox.scrollTop = chatBox.scrollHeight;
+ 
+  // Topic-aware AI response
+  let reply = "Great question! ";
+  if(chosenTopic && aiResponses[chosenTopic]) {
+    reply += aiResponses[chosenTopic][Math.floor(Math.random() * aiResponses[chosenTopic].length)];
+  } else {
+    reply += "Select a topic from Subjects for better answers. I can help with Grammar, Algebra, HTML, Electricity, and more! Try AI Notes for summarizing too!";
+  }
+ 
+  setTimeout(() => {
+    chatBox.innerHTML += `<div style="margin-bottom:12px;padding:12px;background:linear-gradient(135deg,var(--light-blue),var(--light-purple));border-radius:10px;color:#001;"><strong>🤖 AI:</strong> ${reply}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 800);
+}
+
+function showToast(msg, type='success'){
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
-  toast.textContent = message;
+  toast.textContent = msg;
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
 }
 
-function loadSubjects(){
-  const quickContainer = document.getElementById('subjectsQuick');
-  const listContainer = document.getElementById('subjectsList');
-  quickContainer.innerHTML = '';
-  listContainer.innerHTML = '';
-  subjects.forEach(subj => {
-    const card1 = document.createElement('div');
-    card1.className = 'subject-card premium';
-    card1.textContent = subj;
-    quickContainer.appendChild(card1);
-
-    const card2 = card1.cloneNode(true);
-    listContainer.appendChild(card2);
-  });
+// LOAD ROLE ON START
+if(localStorage.getItem('sterlaRole')) {
+  userRole = localStorage.getItem('sterlaRole');
+  userName = userRole;
 }
 
-// Initialize app on page load
-function initApp() {
-  document.getElementById('welcomeUser').textContent = userRole;
-  document.getElementById('totalSubjects').textContent = subjects.length;
-  document.getElementById('totalPapers').textContent = premiumPapers.length;
-  document.getElementById('aiTools').textContent = 7; // or dynamic count of aiChatBank keys
-  updateRoleDisplay();
-  loadSubjects();
-  showToast('Welcome to STERLA PREMIUM! 🚀', 'premium');
-}
-
+// INIT
 initApp();
-
 </script>
 </body>
 </html>
